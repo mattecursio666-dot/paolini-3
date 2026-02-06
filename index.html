@@ -3,58 +3,397 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ariborda!</title>
+    <title>Siena - Visite Guidate | Torre del Mangia</title>
     <style>
-        /* Reset e centraggio */
-        body, html {
+        * {
             margin: 0;
             padding: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #ffffff;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            overflow: hidden;
+            box-sizing: border-box;
         }
 
-        /* Stile del testo */
-        .content {
+        body {
+            font-family: 'Georgia', serif;
+            color: #2c2c2c;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+        }
+
+        /* Background con Torre del Mangia stilizzata */
+        .background-tower {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 50%, #e0e0e0 100%);
+        }
+
+        .tower-svg {
+            position: absolute;
+            right: -10%;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.15;
+            width: 800px;
+            height: 900px;
+        }
+
+        @media (max-width: 768px) {
+            .tower-svg {
+                width: 500px;
+                height: 600px;
+                right: -20%;
+            }
+        }
+
+        /* Header */
+        header {
             text-align: center;
+            padding: 80px 20px 40px;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.7);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
         }
 
         h1 {
-            font-size: 6rem;
-            font-weight: 900;
+            font-size: 3.5rem;
+            font-weight: 300;
+            letter-spacing: 3px;
             color: #1a1a1a;
-            margin: 0;
-            letter-spacing: -3px;
-            /* Animazione d'ingresso */
-            animation: bounceIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-bottom: 10px;
+            text-transform: uppercase;
         }
 
-        @keyframes bounceIn {
-            0% { opacity: 0; transform: scale(0.3); }
-            50% { opacity: 1; transform: scale(1.05); }
-            70% { transform: scale(0.9); }
-            100% { transform: scale(1); }
+        .subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            font-style: italic;
+            letter-spacing: 2px;
         }
 
-        /* Responsive per dispositivi mobili */
-        @media (max-width: 600px) {
+        /* Main Content */
+        .container {
+            max-width: 1000px;
+            margin: 60px auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .intro {
+            background: rgba(255, 255, 255, 0.85);
+            padding: 50px 40px;
+            margin-bottom: 60px;
+            border-left: 4px solid #8b7355;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .intro h2 {
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .intro p {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        /* Tours Grid */
+        .tours {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .tour-card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px 30px;
+            border-radius: 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 3px solid #8b7355;
+        }
+
+        .tour-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .tour-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: #1a1a1a;
+            font-weight: 500;
+        }
+
+        .tour-card p {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+        }
+
+        .tour-duration {
+            color: #999;
+            font-size: 0.85rem;
+            font-style: italic;
+        }
+
+        /* Highlight Section */
+        .highlight {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 50px 40px;
+            margin: 60px 0;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .highlight h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            font-weight: 400;
+        }
+
+        .highlight p {
+            font-size: 1.05rem;
+            color: #555;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Info Section */
+        .info {
+            background: rgba(255, 255, 255, 0.85);
+            padding: 40px;
+            text-align: center;
+            margin-top: 60px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .contact {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .contact-item {
+            padding: 20px;
+        }
+
+        .contact-item strong {
+            color: #1a1a1a;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .contact-item p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #999;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.7);
+            margin-top: 60px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
             h1 {
-                font-size: 3rem;
-                letter-spacing: -1px;
+                font-size: 2.2rem;
+                letter-spacing: 2px;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .intro {
+                padding: 30px 20px;
+            }
+
+            .intro h2 {
+                font-size: 1.5rem;
+            }
+
+            .highlight {
+                padding: 30px 20px;
+            }
+
+            .highlight h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 40px 20px 20px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+                letter-spacing: 1px;
+            }
+
+            .intro,
+            .highlight {
+                padding: 20px 15px;
             }
         }
     </style>
 </head>
 <body>
-
-    <div class="content">
-        <h1>ariborda!</h1>
+    <div class="background-tower">
+        <svg class="tower-svg" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+            <!-- Torre del Mangia - Silhouette stilizzata monocromatica -->
+            <!-- Base della torre -->
+            <rect x="150" y="350" width="100" height="150" fill="#cccccc" opacity="0.8"/>
+            
+            <!-- Corpo principale della torre -->
+            <rect x="140" y="100" width="120" height="250" fill="#b3b3b3" opacity="0.8"/>
+            
+            <!-- Sezione superiore -->
+            <rect x="130" y="70" width="140" height="40" fill="#999999" opacity="0.8"/>
+            
+            <!-- Merlature -->
+            <rect x="130" y="50" width="15" height="25" fill="#999999" opacity="0.8"/>
+            <rect x="155" y="50" width="15" height="25" fill="#999999" opacity="0.8"/>
+            <rect x="180" y="50" width="15" height="25" fill="#999999" opacity="0.8"/>
+            <rect x="205" y="50" width="15" height="25" fill="#999999" opacity="0.8"/>
+            <rect x="230" y="50" width="15" height="25" fill="#999999" opacity="0.8"/>
+            <rect x="255" y="50" width="15" height="25" fill="#999999" opacity="0.8"/>
+            
+            <!-- Pinnacolo/Campanile -->
+            <path d="M 200 50 L 190 30 L 210 30 Z" fill="#808080" opacity="0.8"/>
+            <circle cx="200" cy="25" r="3" fill="#666666" opacity="0.8"/>
+            
+            <!-- Finestre -->
+            <rect x="160" y="140" width="12" height="15" fill="#e6e6e6" opacity="0.6"/>
+            <rect x="180" y="140" width="12" height="15" fill="#e6e6e6" opacity="0.6"/>
+            <rect x="228" y="140" width="12" height="15" fill="#e6e6e6" opacity="0.6"/>
+            
+            <rect x="160" y="190" width="12" height="15" fill="#e6e6e6" opacity="0.6"/>
+            <rect x="180" y="190" width="12" height="15" fill="#e6e6e6" opacity="0.6"/>
+            <rect x="228" y="190" width="12" height="15" fill="#e6e6e6" opacity="0.6"/>
+            
+            <rect x="160" y="240" width="12" height="15" fill="#e6e6e6" opacity="0.6"/>
+            <rect x="180" y="240" width="12" height="15" fill="#e6e6e6" opacity="0.6"/>
+            <rect x="228" y="240" width="12" height="15" fill="#e6e6e6" opacity="0.6"/>
+            
+            <!-- Porta principale -->
+            <rect x="185" y="320" width="30" height="40" fill="#808080" opacity="0.8"/>
+            <circle cx="212" cy="340" r="2" fill="#ffffff" opacity="0.5"/>
+        </svg>
     </div>
+
+    <header>
+        <h1>Siena</h1>
+        <p class="subtitle">Visite Guidate • Scopri la Magia Medievale</p>
+    </header>
+
+    <div class="container">
+        <section class="intro">
+            <h2>Benvenuto nel Cuore della Toscana</h2>
+            <p>
+                Siena ti aspetta con i suoi vicoli affascinanti, le piazze storiche e l'architettura medievale senza tempo. 
+                Le nostre visite guidate ti condurranno attraverso i secoli di storia, arte e tradizione di questa magnifica città.
+                Scopri ogni angolo, dalle famose Contrade alla splendida Cattedrale, guidato da esperti appassionati che conoscono 
+                ogni segreto di Siena.
+            </p>
+        </section>
+
+        <section class="tours">
+            <div class="tour-card">
+                <h3>Piazza del Campo</h3>
+                <p>Immergiti nella più bella piazza medievale d'Italia. Scopri la storia del Palio e l'architettura straordinaria della Torre del Mangia, simbolo indiscusso di Siena.</p>
+                <p class="tour-duration">⏱️ Durata: 1 ora</p>
+            </div>
+
+            <div class="tour-card">
+                <h3>Cattedrale & Museo</h3>
+                <p>Ammira uno dei capolavori del Gotico italiano con i suoi marmi policromi e gli affreschi straordinari. Visita la Biblioteca Piccolomini e il Baptistero.</p>
+                <p class="tour-duration">⏱️ Durata: 1.5 ore</p>
+            </div>
+
+            <div class="tour-card">
+                <h3>Contrade Storiche</h3>
+                <p>Percorri i vicoli affascinanti delle Contrade di Siena. Conosci le tradizioni, i colori e la storia medievale che ancora today i cittadini.</p>
+                <p class="tour-duration">⏱️ Durata: 2 ore</p>
+            </div>
+        </section>
+
+        <section class="highlight">
+            <h2>La Torre del Mangia</h2>
+            <p>
+                Eretta nel 1338, la Torre del Mangia è il simbolo più raffinato di Siena. Con i suoi 102 metri di altezza, 
+                domina magistralmente la Piazza del Campo. Salendo i 505 gradini, vivrai un'esperienza indimenticabile affacciandoti 
+                su una delle viste più spettacolari della Toscana. La sua campana, che ancora suona ogni sera al tramonto, segna il 
+                ritmo della vita senese come ha fatto per più di 680 anni.
+            </p>
+        </section>
+
+        <section class="tours">
+            <div class="tour-card">
+                <h3>Tour Esclusivo al Tramonto</h3>
+                <p>Vivi Siena in un'atmosfera magica al tramonto. Passeggia tra le piazze illuminate dolcemente mentre la città si addormenta, concludendo con vista panoramica dalla Torre.</p>
+                <p class="tour-duration">⏱️ Durata: 2 ore</p>
+            </div>
+
+            <div class="tour-card">
+                <h3>Arte e Rinascimento</h3>
+                <p>Un percorso affascinante dedicato ai capolavori artistici di Siena. Dalle opere di Duccio ai dipinti della Pinacoteca, scopri secoli di bellezza.</p>
+                <p class="tour-duration">⏱️ Durata: 2.5 ore</p>
+            </div>
+
+            <div class="tour-card">
+                <h3>Palio Week Experience</h3>
+                <p>Durante il periodo del Palio (luglio e agosto), vivi l'emozione e la tradizione della competizione più celebre della Toscana.</p>
+                <p class="tour-duration">⏱️ Durata: Variabile</p>
+            </div>
+        </section>
+
+        <section class="info">
+            <h3>Contattaci</h3>
+            <div class="contact">
+                <div class="contact-item">
+                    <strong>Telefono</strong>
+                    <p>+39 (0)577 xyz xxxx</p>
+                </div>
+                <div class="contact-item">
+                    <strong>Email</strong>
+                    <p>info@sienavisite.it</p>
+                </div>
+                <div class="contact-item">
+                    <strong>Orari</strong>
+                    <p>Lun-Dom: 9:00 - 19:00</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Siena Visite Guidate. Scopri la magia medievale. Preserviamo il passato, celebriamo il presente.</p>
+    </footer>
 
 </body>
 </html>
