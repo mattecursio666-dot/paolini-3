@@ -22,56 +22,46 @@
         .background-tower {
             position: fixed;
             top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+                <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <title>Grammatica Latina — Domus Romana</title>
+                <link rel="stylesheet" href="styles.css">
             z-index: -1;
             overflow: hidden;
-            background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 50%, #e0e0e0 100%);
-        }
-
-        .tower-svg {
-            position: absolute;
-            right: -10%;
-            top: 50%;
-            transform: translateY(-50%);
-            opacity: 0.15;
-            width: 800px;
-            height: 900px;
-        }
-
-        @media (max-width: 768px) {
-            .tower-svg {
-                width: 500px;
-                height: 600px;
-                right: -20%;
-            }
-        }
-
-        /* Header */
-        header {
-            text-align: center;
-            padding: 80px 20px 40px;
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.7);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
-        h1 {
-            font-size: 3.5rem;
-            font-weight: 300;
-            letter-spacing: 3px;
-            color: #1a1a1a;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-
-        .subtitle {
-            font-size: 1.2rem;
-            color: #666;
+                <header class="hero">
+                    <div class="hero-inner">
+                        <div class="laurel" aria-hidden="true">
+                            <svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+                                <g fill="#b8862b">
+                                    <path d="M10 60 C30 10, 70 10, 90 60 C70 45, 30 45, 10 60" />
+                                    <path d="M110 60 C130 10, 170 10, 190 60 C170 45, 130 45, 110 60" />
+                                </g>
+                            </svg>
+                        </div>
+                        <h1>Domus Romana — Grammatica Latina</h1>
+                        <p class="subtitle">Un compendio elegante e completo dei fondamenti e delle sottigliezze della lingua latina.</p>
+                    </div>
+                </header>
             font-style: italic;
+                <main class="layout">
+                    <aside class="sidebar">
+                        <div class="search">
+                            <input id="search" placeholder="Cerca argomento..." />
+                        </div>
+                        <nav id="topicsList" class="topics" aria-label="Elenco argomenti grammatica"></nav>
+                        <footer class="source">Stile ispirato all'Impero Romano d'Occidente • Contenuti didattici originali</footer>
+                    </aside>
             letter-spacing: 2px;
+                    <section id="detail" class="detail">
+                        <article id="content">
+                            <h2>Benvenuto in Domus Romana</h2>
+                            <p>Seleziona un argomento sulla sinistra per consultare spiegazioni, specchietti riepilogativi e curiosità. Il sito è pensato per studio, ripasso e approfondimento.</p>
+                            <p class="note">Suggerimento: usa la ricerca in alto per filtrare rapidamente gli argomenti.</p>
+                        </article>
+                    </section>
+                </main>
         }
+                <script src="script.js" defer></script>
 
         /* Main Content */
         .container {
